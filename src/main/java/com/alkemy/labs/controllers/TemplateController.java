@@ -110,4 +110,8 @@ public class TemplateController {
         return "menu";
     }
 
+    @GetMapping("/loginError")
+    public String loginError(){
+        return "login";
+    }
 }

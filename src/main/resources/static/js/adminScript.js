@@ -6,7 +6,6 @@ const d = document,
     $deleteModal = d.querySelector('#deleteModal'),
     $deleteButtons = d.querySelectorAll('.deleteButton');
 
-
 /* Edit Modal */
 $editButtons.forEach(($editButton) => {
     $editButton.addEventListener("click", (e) => {
@@ -69,17 +68,13 @@ const getTeacher = async (link) => {
     $detailsModal.classList.add('show')
     $detailsModal.style = 'display:block';
 }
-
 $detailsModal.addEventListener('click', (e) => {
     if(e.target.matches('.close *') || e.target.matches('.close-button')) {
         $detailsModal.classList.remove('show');
         $detailsModal.style = 'display:none';
     }
 })
-
-
 /* Delete Modal */
-
 $deleteButtons.forEach(($deleteButton) => {
     $deleteButton.addEventListener('click', e => {
         e.preventDefault();

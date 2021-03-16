@@ -1,0 +1,36 @@
+.user [required]:valid {
+    border: thin solid #0f0;
+}
+
+.user [required]:invalid {
+    border: thin solid #f00;
+}
+
+.user-error {
+    margin-top: -1rem;
+    transition: all 800ms ease;
+}
+
+.is-active {
+    display: block;
+    margin-top: 5px;
+    animation: show-message 1s 1 normal 0s ease-out both;
+}
+
+.none {
+    display: none;
+}
+
+
+@keyframes show-message {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+
+    }
+
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
