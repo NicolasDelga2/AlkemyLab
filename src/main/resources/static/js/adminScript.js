@@ -11,15 +11,14 @@ $editButtons.forEach(($editButton) => {
     $editButton.addEventListener("click", (e) => {
         e.preventDefault();
         let link = e.currentTarget.getAttribute('href');
-        getAll(link);
+        getData(link);
     });
 });
 
-const getAll = async (link) => {
+const getData = async (link) => {
     try {
         let res = await fetch(`http://localhost:8080${link}`);
         let json = await res.json();
-        console.log(json);
         if (!res.ok) throw {
             status: res.status,
             statusText: res.statusText
@@ -30,7 +29,8 @@ const getAll = async (link) => {
         $editModal.querySelector('#isActiveEdit').value = json.activo;
 
     } catch (err) {
-
+        let message = err.statusText || "Ocurrio un Error";
+        // Agregar el mensaje en el DOM
     }
     $editModal.classList.add('show')
     $editModal.style = 'display:block';
@@ -42,7 +42,6 @@ $editModal.querySelector('.close').addEventListener('click', (e) => {
 })
 
 /* Details Modal */
-
 $detailsButtons.forEach(($detailButton) => {
     $detailButton.addEventListener('click', e => {
         e.preventDefault();
@@ -57,39 +56,44 @@ const getTeacher = async (link) => {
         let res = await fetch(`http://localhost:8080${link}`)
         let json = await res.json();
 
+        if (!res.ok) throw {
+            status: res.status,
+            statusText: res.statusText
+        };
 
         $detailsModal.querySelector('#nameDetails').value = json.username;
         $detailsModal.querySelector('#rolDetails').value = json.rol;
         $detailsModal.querySelector('#isActiveDetails').value = json.activo;
 
-    }catch(err){
-
+    } catch (err) {
+        let message = err.statusText || 'Ocurrio un error';
+        // Agregar error al Dom
     }
     $detailsModal.classList.add('show')
     $detailsModal.style = 'display:block';
 }
 $detailsModal.addEventListener('click', (e) => {
-    if(e.target.matches('.close *') || e.target.matches('.close-button')) {
+    if (e.target.matches('.close *') || e.target.matches('.close-button')) {
         $detailsModal.classList.remove('show');
         $detailsModal.style = 'display:none';
     }
-})
+});
+
 /* Delete Modal */
 $deleteButtons.forEach(($deleteButton) => {
     $deleteButton.addEventListener('click', e => {
         e.preventDefault();
         let link = e.currentTarget.getAttribute('href');
         $deleteModal.querySelector('#confirmDeleteButton')
-            .setAttribute('href',`http://localhost:8080${link}`);
+            .setAttribute('href', `http://localhost:8080${link}`);
         $deleteModal.classList.add('show');
         $deleteModal.style = 'display:block';
     })
-})
-
+});
 
 $deleteModal.addEventListener('click', e => {
-    if(e.target.matches('.close *') || e.target.matches('.cancel-button')){
+    if (e.target.matches('.close *') || e.target.matches('.cancel-button')) {
         $deleteModal.classList.remove('show');
         $deleteModal.style = 'display:none';
     }
-})
+});

@@ -106,18 +106,14 @@
                     <i class="fa fa-bars"></i>
                 </button>
 
-
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
-
-
-
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2  d-lg-inline text-gray-600 small" th:text="${#authentication.getPrincipal().getUsername()}">User</span>
+                            <span class="mr-2  d-lg-inline text-gray-600 small" th:text="${username}">User</span>
                             <img class="img-profile rounded-circle"
                                  src="img/undraw_profile.svg">
                         </a>
@@ -279,7 +275,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-
                             <!-- page end-->
                         </section>
                     </section>
@@ -455,10 +450,8 @@
     </div>
 </div>
 
-
 <!-- Bootstrap core JavaScript-->
 <script src="js/menu.js"></script>
-
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -469,7 +462,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-
 
 </body>
 

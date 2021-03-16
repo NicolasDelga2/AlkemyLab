@@ -37,7 +37,6 @@ $studentButton.addEventListener('click', e => {
 
 const setAttributes = ($inputs) => {
     $inputs.forEach(input => {
-        console.log(input);
         const $span = d.createElement("span");
         $span.id = input.name;
         $span.textContent = input.title;

@@ -295,6 +295,7 @@
                         <div class="form-group">
                             <label for="isActiveAdd" class="col-form-label">Profesores:</label>
                             <select name="idTeacher" id="isActiveAdd" class="form-control">
+                                <option th:value="-1"></option>
                                 <option th:each="teacher : ${teachers}"
                                         th:value="${teacher.id}"
                                         th:text="${teacher.name}+ ' '+${teacher.lastname}">

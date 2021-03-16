@@ -2,6 +2,7 @@ package com.alkemy.labs.controllers;
 
 import com.alkemy.labs.models.Student;
 import com.alkemy.labs.models.Subject;
+import com.alkemy.labs.models.User;
 import com.alkemy.labs.services.StudentService;
 import com.alkemy.labs.services.SubjectService;
 import com.alkemy.labs.services.TeacherService;
@@ -56,7 +57,12 @@ public class TemplateController {
                 .findFirst()
                 .orElse(null);
 
+        User user = userService.getUsers().stream().filter(u -> u.getUsername().equals(name))
+                .findFirst().orElse(null);
+
         if (student == null) {
+            model.addAttribute("username",user.getUsername());
+
             model.addAttribute("subjects", subjectService.getSubjects());
             model.addAttribute("countStudents", studentService.getStudents().size());
             model.addAttribute("countTeacher", teacherService.getTeachers().size());
@@ -83,11 +89,6 @@ public class TemplateController {
                 .findFirst()
                 .orElse(null);
 
-
-        if(student == null){
-            // Admin
-            return "menu";
-        }
         int pageSize = subjectService.getSubjects().size();
 
         Page<Subject> page = subjectService.findPaginated(pageNo, pageSize, sortField, sortDir);
@@ -106,6 +107,10 @@ public class TemplateController {
 
         model.addAttribute("subjects",newSubjectList);
         model.addAttribute("studentSubjects", student.getSubject());
+
+        // Username
+        String username = student.getName()+ " " +student.getLastname();
+        model.addAttribute("username",username);
 
         return "menu";
     }
