@@ -11,16 +11,16 @@ const d = document,
 $editButtons.forEach(($editButton) => {
     $editButton.addEventListener("click", (e) => {
         e.preventDefault();
+        let url = location.origin;
         let link = e.currentTarget.getAttribute('href');
-        getAll(link);
+        getEdit(url,link);
     });
 });
 
-const getAll = async (link) => {
+const getEdit = async (url,link) => {
     try {
-        let res = await fetch(`http://localhost:8080${link}`);
+        let res = await fetch(`${url}${link}`);
         let json = await res.json();
-        console.log(json);
         if (!res.ok) throw {
             status: res.status,
             statusText: res.statusText
@@ -51,15 +51,16 @@ $editModal.addEventListener('click', e => {
 $detailsButtons.forEach(($detailButton) => {
     $detailButton.addEventListener('click', e => {
         e.preventDefault();
+        let url = window.location.origin;
         let link = e.currentTarget.getAttribute('href');
-        getTeacher(link);
-    })
+        getStudent(url,link);
+   })
 })
 
-const getTeacher = async (link) => {
+const getStudent = async (url,link) => {
 
     try {
-        let res = await fetch(`http://localhost:8080${link}`)
+        let res = await fetch(`${url}${link}`)
         let json = await res.json();
 
         $detailsModal.querySelector('#nameDetails').value = json.name;
@@ -84,13 +85,13 @@ $detailsModal.addEventListener('click', e => {
 
 
 /* Delete Modal */
-
 $deleteButtons.forEach(($deleteButton) => {
     $deleteButton.addEventListener('click', e => {
         e.preventDefault();
         let link = e.currentTarget.getAttribute('href');
+        let url = location.origin;
         $deleteModal.querySelector('#confirmDeleteButton')
-            .setAttribute('href',`http://localhost:8080${link}`);
+            .setAttribute('href',`${url}${link}`);
         $deleteModal.classList.add('show');
         $deleteModal.style = 'display:block';
     })

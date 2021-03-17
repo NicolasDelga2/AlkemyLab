@@ -6,21 +6,20 @@ const d = document,
     $deleteModal = d.querySelector('#deleteModal'),
     $deleteButtons = d.querySelectorAll('.deleteButton');
 
-
 /* Edit Modal */
 $editButtons.forEach(($editButton) => {
     $editButton.addEventListener("click", (e) => {
         e.preventDefault();
+        let url = location.origin;
         let link = e.currentTarget.getAttribute('href');
-        getAll(link);
+        getAll(url,link);
     });
 });
 
-const getAll = async (link) => {
+const getAll = async (url,link) => {
     try {
-        let res = await fetch(`http://localhost:8080${link}`);
+        let res = await fetch(`${url}${link}`);
         let json = await res.json();
-        console.log(json);
         if (!res.ok) throw {
             status: res.status,
             statusText: res.statusText
@@ -32,7 +31,7 @@ const getAll = async (link) => {
         $editModal.querySelector('#isActiveEdit').value = json.isActive;
 
     } catch (err) {
-
+        // Set the error
     }
     $editModal.classList.add('show')
     $editModal.style = 'display:block';
@@ -44,21 +43,19 @@ $editModal.querySelector('.close').addEventListener('click', (e) => {
 })
 
 /* Details Modal */
-
 $detailsButtons.forEach(($detailButton) => {
     $detailButton.addEventListener('click', e => {
         e.preventDefault();
+        let url = location.origin;
         let link = e.currentTarget.getAttribute('href');
-        getTeacher(link);
+        getTeacher(url,link);
     })
 })
 
-const getTeacher = async (link) => {
-
+const getTeacher = async (url,link) => {
     try {
-        let res = await fetch(`http://localhost:8080${link}`)
+        let res = await fetch(`${url}${link}`)
         let json = await res.json();
-
 
         $detailsModal.querySelector('#nameDetails').value = json.name;
         $detailsModal.querySelector('#lastnameDetails').value = json.lastname;
@@ -77,20 +74,18 @@ $detailsModal.querySelector('.close').addEventListener('click', (e) => {
     $detailsModal.style = 'display:none';
 })
 
-
 /* Delete Modal */
-
 $deleteButtons.forEach(($deleteButton) => {
     $deleteButton.addEventListener('click', e => {
         e.preventDefault();
+        let url = location.origin;
         let link = e.currentTarget.getAttribute('href');
         $deleteModal.querySelector('#confirmDeleteButton')
-            .setAttribute('href',`http://localhost:8080${link}`);
+            .setAttribute('href',`${url}${link}`);
         $deleteModal.classList.add('show');
         $deleteModal.style = 'display:block';
     })
 })
-
 
 $deleteModal.addEventListener('click', e => {
     if(e.target.matches('.close') || e.target.matches('.cancel-button')){

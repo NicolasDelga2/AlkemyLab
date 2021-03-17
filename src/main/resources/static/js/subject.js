@@ -11,16 +11,16 @@ const d = document,
 $editButtons.forEach(($editButton) => {
     $editButton.addEventListener("click", (e) => {
         e.preventDefault();
+        let url = location.origin;
         let link = e.currentTarget.getAttribute('href');
-        getAll(link);
+        getAll(url,link);
     });
 });
 
-const getAll = async (link) => {
+const getAll = async (url,link) => {
     try {
-        let res = await fetch(`http://localhost:8080${link}`);
+        let res = await fetch(`${url}${link}`);
         let json = await res.json();
-        console.log(json);
         if (!res.ok) throw {
             status: res.status,
             statusText: res.statusText
@@ -33,7 +33,6 @@ const getAll = async (link) => {
         $editModal.querySelector('#vacancyEdit').value = json.inscriptionVacancy;
 
         // Set the values of the delete Teacher
-
         let $optionsFragment = document.createDocumentFragment();
         json.teachers.forEach((teacher) => {
             const {name,lastname,id} = teacher;
@@ -44,16 +43,12 @@ const getAll = async (link) => {
         })
         $editModal.querySelector('#deleteTeacher').appendChild($optionsFragment);
 
-
-
-
     } catch (err) {
-
+        // Set the Error
     }
     $editModal.classList.add('show')
     $editModal.style = 'display:block';
 }
-
 
 $editModal.addEventListener('click', e => {
     if(e.target.matches('.close *') || e.target.matches('.close-button')){
@@ -63,19 +58,18 @@ $editModal.addEventListener('click', e => {
 })
 
 /* Details Modal */
-
 $detailsButtons.forEach(($detailButton) => {
     $detailButton.addEventListener('click', e => {
         e.preventDefault();
+        let url = location.origin;
         let link = e.currentTarget.getAttribute('href');
-        getTeacher(link);
+        getTeacher(url,link);
     })
 })
 
-const getTeacher = async (link) => {
-
+const getTeacher = async (url,link) => {
     try {
-        let res = await fetch(`http://localhost:8080${link}`)
+        let res = await fetch(`${url}${link}`)
         let json = await res.json();
 
         $detailsModal.querySelector('#nameDetails').value = json.name;
@@ -83,7 +77,7 @@ const getTeacher = async (link) => {
         $detailsModal.querySelector('#finishTimeDetails').value = json.finishTime;
         $detailsModal.querySelector('#vacancyDetails').value = json.inscriptionVacancy;
     }catch(err){
-
+        // Set Error case
     }
     $detailsModal.classList.add('show')
     $detailsModal.style = 'display:block';
@@ -96,22 +90,18 @@ $detailsModal.addEventListener('click', e => {
     }
 })
 
-
-
-
 /* Delete Modal */
-
 $deleteButtons.forEach(($deleteButton) => {
     $deleteButton.addEventListener('click', e => {
         e.preventDefault();
+        let url = location.origin;
         let link = e.currentTarget.getAttribute('href');
         $deleteModal.querySelector('#confirmDeleteButton')
-            .setAttribute('href',`http://localhost:8080${link}`);
+            .setAttribute('href',`${url}${link}`);
         $deleteModal.classList.add('show');
         $deleteModal.style = 'display:block';
     })
 })
-
 
 $deleteModal.addEventListener('click', e => {
     if(e.target.matches('.close *') || e.target.matches('.cancel-button')){
