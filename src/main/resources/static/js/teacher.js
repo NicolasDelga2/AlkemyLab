@@ -12,11 +12,11 @@ $editButtons.forEach(($editButton) => {
         e.preventDefault();
         let url = location.origin;
         let link = e.currentTarget.getAttribute('href');
-        getAll(url,link);
+        getEdit(url,link);
     });
 });
 
-const getAll = async (url,link) => {
+const getEdit = async (url,link) => {
     try {
         let res = await fetch(`${url}${link}`);
         let json = await res.json();
