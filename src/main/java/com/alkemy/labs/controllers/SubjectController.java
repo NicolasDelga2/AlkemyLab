@@ -50,7 +50,7 @@ public class SubjectController {
 
         if (teacher == null) {
             subjectService.save(subject);
-            return "redirect;/subject";
+            return "redirect:/subject";
         }
         subject.setTeachers(List.of(teacher));
         subjectService.save(subject);

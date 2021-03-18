@@ -8,6 +8,7 @@ $adminButton = document.querySelector('#adminButton'),
 let $inputs = d.querySelectorAll('.user [required]');
 
 $adminButton.addEventListener('click', e => {
+    $loginForm.classList.toggle('is-active');
     // admin attributes
     $username.setAttribute('placeholder', 'Ingrese su Usuario');
     $username.setAttribute('pattern', '^.{5,15}$'); //  5 to 15 chars
@@ -23,6 +24,7 @@ $adminButton.addEventListener('click', e => {
 });
 
 $studentButton.addEventListener('click', e => {
+    $loginForm.classList.toggle('is-active');
     // Student attributes
     $username.setAttribute('placeholder', 'Ingrese su DNI');
     $username.setAttribute('pattern', '^\\d{8}(?:[-\\s]\\d{4})?$');
